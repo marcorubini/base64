@@ -1,0 +1,45 @@
+\hypertarget{group__Decoding}{}\doxysection{Decoding}
+\label{group__Decoding}\index{Decoding@{Decoding}}
+
+
+Function objects that encode ranges of bytes.  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \mbox{\hyperlink{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_ga0cc810e0f2197eaee37ae7d31bd9f42f}{ml\+::base64\+::decode}}
+\begin{DoxyCompactList}\small\item\em Decode a range with string semantics. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__Decoding_ga393274731790ce64d91d114fb8ea9b51}\label{group__Decoding_ga393274731790ce64d91d114fb8ea9b51}} 
+constexpr auto {\bfseries ml\+::base64\+::decode\+\_\+n}
+\begin{DoxyCompactList}\small\item\em Like \mbox{\hyperlink{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_ga0cc810e0f2197eaee37ae7d31bd9f42f}{decode}} but invocable with a start iterator and a size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Function objects that encode ranges of bytes. 
+
+Decoding function objects accept a range of integral types. Input characters are narrowed to the range \mbox{[}0, 255). You can optionally pass a projection that converts the range value type to \textquotesingle{}char\textquotesingle{}. The default projection uses static\+\_\+cast.
+
+Multiple overloads are available, you can use pairs of iterators or input ranges or iterator + size.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000002}{Todo}}]Allow configuring the decoding algorithm. \end{DoxyRefDesc}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_ga0cc810e0f2197eaee37ae7d31bd9f42f}\label{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_ga0cc810e0f2197eaee37ae7d31bd9f42f}} 
+\index{Decoding@{Decoding}!decode@{decode}}
+\index{decode@{decode}!Decoding@{Decoding}}
+\doxysubsubsection{\texorpdfstring{decode}{decode}}
+{\footnotesize\ttfamily ml\+::base64\+::decode\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Decode a range with string semantics. 
+
+The range value type must be integral. Characters are assumed to be valid Base64 and encoding stops when the range is exhausted or a padding or null terminator is found.\hypertarget{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_autotoc_md0}{}\doxysubsubsection{Example}\label{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_autotoc_md0}
+\begin{DoxyVerb}std::string_view encoded = "TWFu";
+std::string result;
+ml::base64::decode(encoded, back_inserter(result));
+\end{DoxyVerb}
+ 

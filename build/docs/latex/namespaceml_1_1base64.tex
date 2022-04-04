@@ -1,0 +1,78 @@
+\hypertarget{namespaceml_1_1base64}{}\doxysection{ml\+::base64 Namespace Reference}
+\label{namespaceml_1_1base64}\index{ml::base64@{ml::base64}}
+
+
+Top level namespace.  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \mbox{\hyperlink{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_ga0cc810e0f2197eaee37ae7d31bd9f42f}{decode}}
+\begin{DoxyCompactList}\small\item\em Decode a range with string semantics. \end{DoxyCompactList}\item 
+constexpr auto {\bfseries decode\+\_\+n}
+\begin{DoxyCompactList}\small\item\em Like \mbox{\hyperlink{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_ga0cc810e0f2197eaee37ae7d31bd9f42f}{decode}} but invocable with a start iterator and a size. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba}{encode\+\_\+bytes}}
+\begin{DoxyCompactList}\small\item\em Encode a range of bytes. \end{DoxyCompactList}\item 
+constexpr auto {\bfseries encode\+\_\+bytes\+\_\+n}
+\begin{DoxyCompactList}\small\item\em Like \mbox{\hyperlink{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba}{encode\+\_\+bytes}} but invocable with a start iterator and a size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Top level namespace. 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_ga0cc810e0f2197eaee37ae7d31bd9f42f}\label{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_ga0cc810e0f2197eaee37ae7d31bd9f42f}} 
+\index{ml::base64@{ml::base64}!decode@{decode}}
+\index{decode@{decode}!ml::base64@{ml::base64}}
+\doxysubsubsection{\texorpdfstring{decode}{decode}}
+{\footnotesize\ttfamily ml\+::base64\+::decode\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Decode a range with string semantics. 
+
+The range value type must be integral. Characters are assumed to be valid Base64 and encoding stops when the range is exhausted or a padding or null terminator is found.\hypertarget{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_autotoc_md0}{}\doxysubsubsection{Example}\label{group__Decoding_ga0cc810e0f2197eaee37ae7d31bd9f42f_autotoc_md0}
+\begin{DoxyVerb}std::string_view encoded = "TWFu";
+std::string result;
+ml::base64::decode(encoded, back_inserter(result));
+\end{DoxyVerb}
+ \mbox{\Hypertarget{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba}\label{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba}} 
+\index{ml::base64@{ml::base64}!encode\_bytes@{encode\_bytes}}
+\index{encode\_bytes@{encode\_bytes}!ml::base64@{ml::base64}}
+\doxysubsubsection{\texorpdfstring{encode\_bytes}{encode\_bytes}}
+{\footnotesize\ttfamily ml\+::base64\+::encode\+\_\+bytes\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Encode a range of bytes. 
+
+\begin{DoxyRemark}{Remarks}
+The input range does not have string semantics, it is not expected to be null terminated. Any null terminator will be encoded. This is a problem if you try to encode character arrays with string semantics, like\+: \begin{DoxyVerb}ml::base64::encode("Man", output);
+\end{DoxyVerb}
+ To fix this, use std\+::string\+\_\+view instead of character arrays.
+
+Likewise, the output is not null terminated. When the output is a character array with string semantics, you need to manually add the null terminator.
+\end{DoxyRemark}
+\hypertarget{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_autotoc_md1}{}\doxysubsubsection{Example -\/ Encoding a string}\label{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_autotoc_md1}
+\begin{DoxyVerb}std::string_view text = "ABC";
+std::string result;
+ml::base64::encode_bytes(text, back_inserter(result));
+\end{DoxyVerb}
+ \hypertarget{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_autotoc_md2}{}\doxysubsubsection{Example -\/ Iterator interface}\label{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_autotoc_md2}
+\begin{DoxyVerb}std::string_view text = "ABC";
+std::string result;
+ml::base64::encode_bytes(text.begin(), text.end(), back_inserter(result));
+\end{DoxyVerb}
+ \hypertarget{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_autotoc_md3}{}\doxysubsubsection{Example -\/ Encoding a stream}\label{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_autotoc_md3}
+\begin{DoxyVerb}auto in = std::ranges::istream_view<char>(std::cin);
+std::string result;
+ml::base64::encode_bytes(in, back_inserter(result));
+\end{DoxyVerb}
+ \hypertarget{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_autotoc_md4}{}\doxysubsubsection{Example -\/ Adding null terminator}\label{group__Encoding_gae0b0ee4f7585e5e7b7f6c5e5dfedf6ba_autotoc_md4}
+\begin{DoxyVerb}std::string_view text = "ABC";
+char result[100];
+char* last = ml::base64::encode_bytes(text, result);
+*last = '\0';
+\end{DoxyVerb}
+ 
